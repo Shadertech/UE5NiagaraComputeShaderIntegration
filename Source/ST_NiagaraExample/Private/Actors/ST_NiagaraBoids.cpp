@@ -2,8 +2,6 @@
 
 #include "Actors/ST_NiagaraBoids.h"
 #include "Kismet/GameplayStatics.h"
-#include "SceneRendering.h"
-#include "ScenePrivate.h"
 #include "NiagaraDataInterfaceArrayFloat.h"
 #include "Settings/ST_NiagaraExampleSettings.h"
 #include "NiagaraDataInterfaceArrayFunctionLibrary.h"

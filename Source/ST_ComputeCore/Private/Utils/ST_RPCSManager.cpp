@@ -2,9 +2,8 @@
 
 #include "Utils/ST_RPCSManager.h"
 #include "Kismet/GameplayStatics.h"
-#include "SceneRendering.h"
-#include "ScenePrivate.h"
 #include "Engine/Engine.h"
+#include "CommonRenderResources.h"
 #include "RHICommandList.h"
 
 DEFINE_LOG_CATEGORY(LogRPCSManager);

@@ -11,10 +11,14 @@ void FST_GraphBullder_Boids::InitBoidsExample_RenderThread(FRDGBuilder& GraphBui
 	QUICK_SCOPE_CYCLE_COUNTER(STAT_BoidsExample_Init);
 	SCOPED_DRAW_EVENT(GraphBuilder.RHICmdList, BoidsExample_Init);
 
-	const TCHAR* ReadBufferName = *(FString(OwnerName) + TEXT("BoidsInBuffer"));
-	const TCHAR* WriteBufferName = *(FString(OwnerName) + TEXT("BoidsOutBuffer"));
-	const TCHAR* SRVName = *(FString(OwnerName) + TEXT("BoidsIn_StructuredBuffer"));
-	const TCHAR* UAVName = *(FString(OwnerName) + TEXT("BoidsOut_StructuredBuffer"));
+	FString ReadBufferNameStr = FString(OwnerName) + TEXT("BoidsInBuffer");
+	const TCHAR* ReadBufferName = *ReadBufferNameStr;
+	FString WriteBufferNameStr = FString(OwnerName) + TEXT("BoidsOutBuffer");
+	const TCHAR* WriteBufferName = *WriteBufferNameStr;
+	FString SRVNameStr = FString(OwnerName) + TEXT("BoidsIn_StructuredBuffer");
+	const TCHAR* SRVName = *SRVNameStr;
+	FString UAVNameStr = FString(OwnerName) + TEXT("BoidsOut_StructuredBuffer");
+	const TCHAR* UAVName = *UAVNameStr;
 
 	// First we create an RDG buffer with the appropriate size, and then instruct the graph to upload our CPU data to it.
 	FRDGBufferRef ReadBuffer = UST_ComputeFunctionLibrary::CreateStructuredBuffer(GraphBuilder, ReadBufferName, BoidsArray.GetTypeSize(), BoidsArray.Num());
@@ -85,8 +89,10 @@ void FST_GraphBullder_Boids::ExecuteBoidsExample_RenderThread(FRDGBuilder& Graph
 	QUICK_SCOPE_CYCLE_COUNTER(STAT_BoidsExample_Execute);
 	SCOPED_DRAW_EVENT(GraphBuilder.RHICmdList, BoidsExample_Execute);
 
-	const TCHAR* SRVName = *(FString(OwnerName) + TEXT("BoidsIn_StructuredBuffer"));
-	const TCHAR* UAVName = *(FString(OwnerName) + TEXT("BoidsOut_StructuredBuffer"));
+	FString SRVNameStr = FString(OwnerName) + TEXT("BoidsIn_StructuredBuffer");
+	const TCHAR* SRVName = *SRVNameStr;
+	FString UAVNameStr = FString(OwnerName) + TEXT("BoidsOut_StructuredBuffer");
+	const TCHAR* UAVName = *UAVNameStr;
 	BoidsPingPongBuffer.RegisterRW(GraphBuilder, SRVName, UAVName);
 
 	FST_BoidsRPUpdateExampleCS::FParameters* PassParameters = GraphBuilder.AllocParameters<FST_BoidsRPUpdateExampleCS::FParameters>();

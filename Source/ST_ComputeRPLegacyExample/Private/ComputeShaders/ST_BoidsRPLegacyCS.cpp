@@ -2,8 +2,7 @@
 
 #include "ComputeShaders/ST_BoidsRPLegacyCS.h"
 #include "Kismet/GameplayStatics.h"
-#include "SceneRendering.h"
-#include "ScenePrivate.h"
+#include "ShaderCompilerCore.h"
 
 #define BoidsExample_ThreadsPerGroup 512
 
