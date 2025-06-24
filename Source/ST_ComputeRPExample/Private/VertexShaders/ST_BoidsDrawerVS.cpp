@@ -26,8 +26,13 @@ void FST_SimpleScreenVertexBuffer::InitRHI(FRHICommandListBase& RHICmdList)
 	Vertices[3].UV = FVector2f(1, 1);
 
 	// Create vertex buffer. Fill buffer with initial data upon creation
-	FRHIResourceCreateInfo CreateInfo(TEXT("ShaderDemoSquare"), &Vertices);
-	VertexBufferRHI = RHICmdList.CreateVertexBuffer(Vertices.GetResourceDataSize(), BUF_Static, CreateInfo);
+	const FRHIBufferCreateDesc CreateDesc =
+		FRHIBufferCreateDesc::CreateVertex(TEXT("ShaderDemoSquare"), Vertices.GetResourceDataSize())
+		.AddUsage(BUF_Static)
+		.SetInitActionResourceArray(&Vertices)
+		.DetermineInitialState();
+
+	VertexBufferRHI = RHICmdList.CreateBuffer(CreateDesc);
 }
 
 bool FST_SimplePassThroughVS::ShouldCompilePermutation(const FGlobalShaderPermutationParameters& Parameters)

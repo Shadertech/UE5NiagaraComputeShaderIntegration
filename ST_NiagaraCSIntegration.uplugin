@@ -10,7 +10,7 @@
 	"DocsURL": "https://github.com/Shadertech/UE5NiagaraComputeShaderIntegration",
 	"MarketplaceURL": "https://www.fab.com/listings/85c5b409-a153-4ab9-9f1b-b6bef092b572",
 	"SupportURL": "https://github.com/Shadertech/UE5NiagaraComputeShaderIntegration",
-	"EngineVersion": "5.5.0",
+	"EngineVersion": "5.6.0",
 	"CanContainContent": true,
 	"IsBetaVersion": false,
 	"IsExperimentalVersion": true,
