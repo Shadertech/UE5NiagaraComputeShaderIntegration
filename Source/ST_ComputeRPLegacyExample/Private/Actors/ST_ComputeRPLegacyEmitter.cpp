@@ -108,20 +108,39 @@ void AST_ComputeRPLegacyEmitter::InitComputeShader_RenderThread(FRHICommandListI
 
 	// Copying data from BoidsArray to BoidItemRA
 	FMemory::Memcpy(BoidItemRA.GetData(), BoidsArray.GetData(), BoidItemSize * BoidsArray.Num());
+
+	
+
 	// Creating a structured buffer for reading
-	FRHIResourceCreateInfo CreateReadInfo(TEXT("BoidsInBuffer"));
-	CreateReadInfo.ResourceArray = &BoidItemRA;
-	readBuffer = RHICmdList.CreateStructuredBuffer(BoidItemSize, BoidItemSize * BoidsArray.Num(), BUF_StructuredBuffer | BUF_ShaderResource, CreateReadInfo);
+	const FRHIBufferCreateDesc CreateReadDesc =
+		FRHIBufferCreateDesc::CreateStructured(TEXT("BoidsInBuffer"), BoidItemSize * BoidsArray.Num(), BoidItemSize)
+		.AddUsage(BUF_StructuredBuffer | BUF_ShaderResource)
+		.SetInitActionResourceArray(&BoidItemRA)
+		.DetermineInitialState();
+
+	readBuffer = RHICmdList.CreateBuffer(CreateReadDesc);
+
 	// Creating a structured buffer for writing
-	FRHIResourceCreateInfo CreateWriteInfo(TEXT("BoidsOutBuffer"));
-	writeBuffer = RHICmdList.CreateStructuredBuffer(BoidItemSize, BoidItemSize * BoidsArray.Num(), BUF_UnorderedAccess | BUF_ShaderResource, CreateWriteInfo);
+
+	const FRHIBufferCreateDesc CreateWriteDesc =
+		FRHIBufferCreateDesc::CreateStructured(TEXT("BoidsOutBuffer"), BoidItemSize * BoidsArray.Num(), BoidItemSize)
+		.AddUsage(BUF_UnorderedAccess | BUF_ShaderResource);
+
+	writeBuffer = RHICmdList.CreateBuffer(CreateWriteDesc);
+	
 	auto readSRVCreateDesc = FRHIViewDesc::CreateBufferSRV()
 		.SetType(FRHIViewDesc::EBufferType::Structured)
 		.SetNumElements(BoidCurrentParameters.ConstantParameters.numBoids)
 		.SetStride(BoidItemSize);
 
 	readRef = RHICmdList.CreateShaderResourceView(readBuffer, readSRVCreateDesc);
-	writeRef = RHICmdList.CreateUnorderedAccessView(writeBuffer, false, false);
+
+	auto WriteUAVDesc = FRHIViewDesc::CreateBufferUAV()
+		.SetTypeFromBuffer(writeBuffer)
+		.SetAtomicCounter(false)
+		.SetAppendBuffer(false);
+
+	writeRef = RHICmdList.CreateUnorderedAccessView(writeBuffer, WriteUAVDesc);
 	FRHIBatchedShaderParameters& BatchedParameters = RHICmdList.GetScratchShaderParameters();
 
 	ComputeShader->SetUniformParameters(BatchedParameters, BoidCurrentParameters, 0.0f);
