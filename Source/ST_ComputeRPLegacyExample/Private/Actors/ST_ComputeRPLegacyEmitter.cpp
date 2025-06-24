@@ -2,12 +2,11 @@
 
 #include "Actors/ST_ComputeRPLegacyEmitter.h"
 #include "Kismet/GameplayStatics.h"
-#include "SceneRendering.h"
-#include "ScenePrivate.h"
 #include "ComputeShaders/ST_BoidsRPLegacyCS.h"
 #include "Settings/ST_ComputeRPLegacyExampleSettings.h"
 #include "DataDrivenShaderPlatformInfo.h"
 #include "Niagara/ST_NDIBoidsExampleBufferLegacyFunctionLibrary.h"
+#include "Containers/DynamicRHIResourceArray.h"
 
 #define BoidsExample_ThreadsPerGroup 512
 DEFINE_LOG_CATEGORY(LogComputeRPLegacyEmitter);
