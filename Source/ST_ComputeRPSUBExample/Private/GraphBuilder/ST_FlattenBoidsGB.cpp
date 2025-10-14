@@ -13,7 +13,7 @@ void FST_GraphBullder_FlattenBoids::InitFlattenBoidsExample_RenderThread(FRDGBui
 	SCOPED_DRAW_EVENT(GraphBuilder.RHICmdList, FlattenBoidsExample_Init);
 
 
-	FString WriteBufferNameStr = FString(OwnerName) + TEXT("FlattenBoidsOutBuffer");
+	const FString WriteBufferNameStr = FString(OwnerName) + TEXT("FlattenBoidsOutBuffer");
 	const TCHAR* WriteBufferName = *WriteBufferNameStr;
 
 	FRDGBufferRef WriteBuffer = UST_ComputeFunctionLibrary::CreateStructuredBuffer(GraphBuilder, WriteBufferName, 4, BoidsArray.Num() * 12);
@@ -25,7 +25,7 @@ void FST_GraphBullder_FlattenBoids::ExecuteFlattenBoidsExample_RenderThread(FRDG
 	QUICK_SCOPE_CYCLE_COUNTER(STAT_FlattenBoidsExample_Execute);
 	SCOPED_DRAW_EVENT(GraphBuilder.RHICmdList, FlattenBoidsExample_Execute);
 
-	FString UAVNameStr = FString(OwnerName) + TEXT("FlattenBoidsOut_StructuredBuffer");
+	const FString UAVNameStr = FString(OwnerName) + TEXT("FlattenBoidsOut_StructuredBuffer");
 	const TCHAR* UAVName = *UAVNameStr;
 	FlattenBoidsPingPongBuffer.RegisterW(GraphBuilder, UAVName);
 
