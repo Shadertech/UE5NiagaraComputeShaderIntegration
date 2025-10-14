@@ -27,7 +27,7 @@ void AST_ComputeActorBase::BeginPlay()
 
 	cachedRPCSManager = UST_RPCSManager::Get(GetWorld());
 
-	if (cachedRPCSManager != nullptr)
+	if (IsValid(cachedRPCSManager))
 	{
 		cachedRPCSManager->Register(this);
 	}
@@ -37,7 +37,7 @@ void AST_ComputeActorBase::BeginPlay()
 void AST_ComputeActorBase::BeginDestroy()
 {
 	Super::BeginDestroy();
-	if (cachedRPCSManager != nullptr)
+	if (IsValid(cachedRPCSManager))
 	{
 		cachedRPCSManager->Deregister(this);
 	}
@@ -48,7 +48,7 @@ bool AST_ComputeActorBase::IsPlaying(const UObject* WorldContextObject)
 {
 #if WITH_EDITOR
 	UWorld* World = WorldContextObject->GetWorld();
-	if (World && !World->IsGameWorld())
+	if (IsValid(World) && !World->IsGameWorld())
 	{
 		return false;
 	}
@@ -63,11 +63,11 @@ void AST_ComputeActorBase::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 #if WITH_EDITOR
-	bool bIsPlaying = AST_ComputeActorBase::IsPlaying(this);
+	const bool bIsPlaying = AST_ComputeActorBase::IsPlaying(this);
 
-	bool CanDebug = !bIsPlaying || (bIsPlaying && bDebugDisplayInRuntime);
+	const bool bCanDebug = !bIsPlaying || (bIsPlaying && bDebugDisplayInRuntime);
 
-	if (bDebugSprite && CanDebug)
+	if (bDebugSprite && bCanDebug)
 	{
 		Billboard->SetHiddenInGame(false, true);
 		Billboard->SetVisibility(true);
@@ -83,7 +83,7 @@ void AST_ComputeActorBase::Tick(float DeltaTime)
 	}
 	bPreviouslySelected = false;
 
-	if ((bDebugBounds && CanDebug) || IsSelected())
+	if ((bDebugBounds && bCanDebug) || IsSelected())
 	{
 		CurrentBoundsColor = BoundsColor;
 
@@ -91,7 +91,7 @@ void AST_ComputeActorBase::Tick(float DeltaTime)
 
 		if (BoundsConstantParameters.bSphere)
 		{
-			int32 Segments = 12;
+			constexpr int32 Segments = 12;
 			DrawDebugSphere(GetWorld(), GetActorLocation(), BoundsConstantParameters.Radius, Segments, CurrentBoundsColor);
 		}
 		else

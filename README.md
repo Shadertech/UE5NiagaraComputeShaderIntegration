@@ -83,15 +83,27 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Release Notes
 
+### v0.1.4
+- Improvement | Const-correctness across codebase
+- Supports: UE 5.6.x
+- Supports: UE 5.5.x
+
 ### v0.1.3
-- BREAKING CHANGES - Renamed all files and classes and prepared the plugin to release free of charge of the Fab marketplace. There is now individual settings for each module.
+- Improvement | General Refactor
+- Improvement | Fab marketplace prep
+- Supports: UE 5.6.x
+- Supports: UE 5.5.x
 
 ### v0.1.2
-- Refactor (won't be an easy upgrade if you have extended a lot of the logic from the last version as I renamed a lot of files and folders)
-- Structured Buffer -> Niagara + Material
+- Bug FIx | Correctly dispose of buffers
+- Feature | Structured Buffer -&gt; Material
+- Supports: UE 5.5.x (13/11/2024)
+- Supports: UE 5.4.x (01/09/2024)
 
 ### v0.1.1
-- Refactor
+- Improvement | General Refactor
+- Supports: UE 5.3.x
 
 ### v0.1.0
-- Initial Release
+- The beginning of Time.
+- Supports: UE 5.3.x
