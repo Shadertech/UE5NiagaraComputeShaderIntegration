@@ -35,7 +35,7 @@ void AST_ComputeRPDrawer::BeginDestroy()
 
 	Super::BeginDestroy();
 
-	if (RenderTarget)
+	if (IsValid(RenderTarget))
 	{
 		RenderTarget->ConditionalBeginDestroy(); // Destroy the render target texture
 		RenderTarget = nullptr; // Reset the pointer
@@ -50,7 +50,7 @@ void AST_ComputeRPDrawer::InitComputeShader_GameThread()
 
 	const UST_ComputeRPExampleSettings* ComputeRPExampleSettings = UST_ComputeRPExampleSettings::GetComputeRPExampleSettings();
 	UMaterialInterface* MatInterface = ComputeRPExampleSettings->BoidsDrawMatInterface.LoadSynchronous();
-	if (MatInterface != nullptr && RenderTarget != nullptr)
+	if (IsValid(MatInterface) && IsValid(RenderTarget))
 	{
 		MID = UMaterialInstanceDynamic::Create(MatInterface, nullptr);
 		Plane->SetMaterial(0, MID);
@@ -149,7 +149,7 @@ bool AST_ComputeRPDrawer::SetConstantParameters()
 	// Resize the array to accommodate numboids elements
 	BoidsArray.SetNum(BoidCurrentParameters.ConstantParameters.numBoids);
 
-	if (Niagara == nullptr || Niagara->GetAsset() == nullptr)
+	if (!IsValid(Niagara) || !IsValid(Niagara->GetAsset()))
 	{
 		return false;
 	}
@@ -170,7 +170,7 @@ bool AST_ComputeRPDrawer::SetDynamicParameters()
 	BoidCurrentParameters.transformMatrix = (FMatrix44f)BoundsMatrix;
 	BoidCurrentParameters.inverseTransformMatrix = (FMatrix44f)BoundsMatrix.Inverse();
 
-	if (Niagara == nullptr || Niagara->GetAsset() == nullptr)
+	if (!IsValid(Niagara) || !IsValid(Niagara->GetAsset()))
 	{
 		return false;
 	}
@@ -188,9 +188,9 @@ void AST_ComputeRPDrawer::CreateRenderTexture()
 		return;
 	}
 
-	FName TextureName = FName(TEXT("RT_BoidPositions"));
-	int32 SizeX = 32; // Width
-	int32 SizeY = 32; // Height
+	const FName TextureName = FName(TEXT("RT_BoidPositions"));
+	constexpr int32 SizeX = 32; // Width
+	constexpr int32 SizeY = 32; // Height
 
 	RenderTarget = NewObject<UTextureRenderTarget2D>(this, TextureName);
 	RenderTarget->ClearColor = FLinearColor::Black;

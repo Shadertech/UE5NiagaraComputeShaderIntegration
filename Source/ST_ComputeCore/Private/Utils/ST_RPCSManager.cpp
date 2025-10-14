@@ -24,7 +24,7 @@ void UST_RPCSManager::Initialize(FSubsystemCollectionBase& Collection)
 {
 	Super::Initialize(Collection);
 
-	if (GEngine != nullptr)
+	if (IsValid(GEngine))
 	{
 		GEngine->SetMaxFPS(MaxFPS);
 	}
@@ -153,7 +153,7 @@ void UST_RPCSManager::DispatchComputeShaders(float DeltaTime)
 
 UST_RPCSManager* UST_RPCSManager::Get(UWorld* World)
 {
-	if (World == nullptr)
+	if (!IsValid(World))
 	{
 		return nullptr;
 	}

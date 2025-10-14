@@ -27,7 +27,7 @@ void AST_ComputeRPEmitter::BeginPlay()
 
 void AST_ComputeRPEmitter::BeginDestroy()
 {
-	if (Niagara != nullptr)
+	if (IsValid(Niagara))
 	{
 		Niagara->DeactivateImmediate();
 	}
@@ -128,7 +128,7 @@ bool AST_ComputeRPEmitter::SetConstantParameters()
 	// Resize the array to accommodate numboids elements
 	BoidsArray.SetNum(BoidCurrentParameters.ConstantParameters.numBoids);
 
-	if (Niagara == nullptr || Niagara->GetAsset() == nullptr)
+	if (!IsValid(Niagara) || !IsValid(Niagara->GetAsset()))
 	{
 		return false;
 	}
@@ -149,7 +149,7 @@ bool AST_ComputeRPEmitter::SetDynamicParameters()
 	BoidCurrentParameters.transformMatrix = (FMatrix44f)BoundsMatrix;
 	BoidCurrentParameters.inverseTransformMatrix = (FMatrix44f)BoundsMatrix.Inverse();
 
-	if (Niagara == nullptr || Niagara->GetAsset() == nullptr)
+	if (!IsValid(Niagara) || !IsValid(Niagara->GetAsset()))
 	{
 		return false;
 	}

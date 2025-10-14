@@ -11,13 +11,13 @@ void FST_GraphBullder_Boids::InitBoidsExample_RenderThread(FRDGBuilder& GraphBui
 	QUICK_SCOPE_CYCLE_COUNTER(STAT_BoidsExample_Init);
 	SCOPED_DRAW_EVENT(GraphBuilder.RHICmdList, BoidsExample_Init);
 
-	FString ReadBufferNameStr = FString(OwnerName) + TEXT("BoidsInBuffer");
+	const FString ReadBufferNameStr = FString(OwnerName) + TEXT("BoidsInBuffer");
 	const TCHAR* ReadBufferName = *ReadBufferNameStr;
-	FString WriteBufferNameStr = FString(OwnerName) + TEXT("BoidsOutBuffer");
+	const FString WriteBufferNameStr = FString(OwnerName) + TEXT("BoidsOutBuffer");
 	const TCHAR* WriteBufferName = *WriteBufferNameStr;
-	FString SRVNameStr = FString(OwnerName) + TEXT("BoidsIn_StructuredBuffer");
+	const FString SRVNameStr = FString(OwnerName) + TEXT("BoidsIn_StructuredBuffer");
 	const TCHAR* SRVName = *SRVNameStr;
-	FString UAVNameStr = FString(OwnerName) + TEXT("BoidsOut_StructuredBuffer");
+	const FString UAVNameStr = FString(OwnerName) + TEXT("BoidsOut_StructuredBuffer");
 	const TCHAR* UAVName = *UAVNameStr;
 
 	// First we create an RDG buffer with the appropriate size, and then instruct the graph to upload our CPU data to it.
@@ -44,7 +44,7 @@ void FST_GraphBullder_Boids::InitBoidsExample_RenderThread(FRDGBuilder& GraphBui
 	PassParameters->randSeed = FMath::Rand() % (INT32_MAX + 1);
 
 	TShaderMapRef<FST_BoidsRPInitExampleCS> ComputeShader(GetGlobalShaderMap(GMaxRHIFeatureLevel));
-	FIntVector GroupCounts = FIntVector(FMath::DivideAndRoundUp(BoidCurrentParameters.ConstantParameters.numBoids, BoidsExample_ThreadsPerGroup), 1, 1);
+	const FIntVector GroupCounts = FIntVector(FMath::DivideAndRoundUp(BoidCurrentParameters.ConstantParameters.numBoids, BoidsExample_ThreadsPerGroup), 1, 1);
 
 	BoidsRDGStateData.InitPass[0] = FComputeShaderUtils::AddPass(GraphBuilder,
 		RDG_EVENT_NAME("RP_InitBoidsExample"),
@@ -89,9 +89,9 @@ void FST_GraphBullder_Boids::ExecuteBoidsExample_RenderThread(FRDGBuilder& Graph
 	QUICK_SCOPE_CYCLE_COUNTER(STAT_BoidsExample_Execute);
 	SCOPED_DRAW_EVENT(GraphBuilder.RHICmdList, BoidsExample_Execute);
 
-	FString SRVNameStr = FString(OwnerName) + TEXT("BoidsIn_StructuredBuffer");
+	const FString SRVNameStr = FString(OwnerName) + TEXT("BoidsIn_StructuredBuffer");
 	const TCHAR* SRVName = *SRVNameStr;
-	FString UAVNameStr = FString(OwnerName) + TEXT("BoidsOut_StructuredBuffer");
+	const FString UAVNameStr = FString(OwnerName) + TEXT("BoidsOut_StructuredBuffer");
 	const TCHAR* UAVName = *UAVNameStr;
 	BoidsPingPongBuffer.RegisterRW(GraphBuilder, SRVName, UAVName);
 
@@ -115,7 +115,7 @@ void FST_GraphBullder_Boids::ExecuteBoidsExample_RenderThread(FRDGBuilder& Graph
 	PassParameters->alignmentFactor = BoidCurrentParameters.DynamicParameters.alignmentFactor;
 
 	TShaderMapRef<FST_BoidsRPUpdateExampleCS> ComputeShader(GetGlobalShaderMap(GMaxRHIFeatureLevel));
-	FIntVector GroupCounts = FIntVector(FMath::DivideAndRoundUp(BoidCurrentParameters.ConstantParameters.numBoids, BoidsExample_ThreadsPerGroup), 1, 1);
+	const FIntVector GroupCounts = FIntVector(FMath::DivideAndRoundUp(BoidCurrentParameters.ConstantParameters.numBoids, BoidsExample_ThreadsPerGroup), 1, 1);
 	BoidsRDGStateData.ExecutePass[0] = FComputeShaderUtils::AddPass(GraphBuilder,
 		RDG_EVENT_NAME("RP_BoidsUpdateExample"),
 		ERDGPassFlags::Compute | ERDGPassFlags::NeverCull,
