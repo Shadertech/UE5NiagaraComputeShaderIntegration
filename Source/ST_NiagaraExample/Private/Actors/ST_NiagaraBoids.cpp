@@ -53,7 +53,7 @@ void AST_NiagaraBoids::BeginDestroy()
 
 bool AST_NiagaraBoids::SetConstantParameters()
 {
-	if (Niagara == nullptr || Niagara->GetAsset() == nullptr)
+	if (!IsValid(Niagara) || !IsValid(Niagara->GetAsset()))
 	{
 		return false;
 	}
@@ -67,7 +67,7 @@ bool AST_NiagaraBoids::SetConstantParameters()
 
 bool AST_NiagaraBoids::SetDynamicParameters()
 {
-	if (Niagara == nullptr || Niagara->GetAsset() == nullptr)
+	if (!IsValid(Niagara) || !IsValid(Niagara->GetAsset()))
 	{
 		return false;
 	}
@@ -84,8 +84,8 @@ bool AST_NiagaraBoids::SetDynamicParameters()
 	bool EditorAndNotPlaying = false;
 
 #if WITH_EDITOR
-	UWorld* World = Niagara->GetWorld();
-	if (World && !World->IsGameWorld())
+	const UWorld* World = Niagara->GetWorld();
+	if (IsValid(World) && !World->IsGameWorld())
 	{
 		EditorAndNotPlaying = true;
 	}

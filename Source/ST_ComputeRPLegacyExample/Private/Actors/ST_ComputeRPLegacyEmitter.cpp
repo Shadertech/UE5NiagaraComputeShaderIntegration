@@ -31,7 +31,7 @@ void AST_ComputeRPLegacyEmitter::BeginPlay()
 
 void AST_ComputeRPLegacyEmitter::BeginDestroy()
 {
-	if (Niagara != nullptr)
+	if (IsValid(Niagara))
 	{
 		Niagara->DeactivateImmediate();
 	}
@@ -189,7 +189,7 @@ void AST_ComputeRPLegacyEmitter::ExecuteComputeShader_RenderThread(FRHICommandLi
 	ComputeShader->SetBufferParameters(BatchedParameters, readRef, writeRef);
 
 	RHICmdList.SetBatchedShaderParameters(ShaderRHI, BatchedParameters);
-	FIntVector GroupCounts = FIntVector(FMath::DivideAndRoundUp(BoidCurrentParameters.ConstantParameters.numBoids, BoidsExample_ThreadsPerGroup), 1, 1);
+	const FIntVector GroupCounts = FIntVector(FMath::DivideAndRoundUp(BoidCurrentParameters.ConstantParameters.numBoids, BoidsExample_ThreadsPerGroup), 1, 1);
 	DispatchComputeShader(RHICmdList, ComputeShader, GroupCounts.X, GroupCounts.Y, GroupCounts.Z);
 	FRHIBatchedShaderUnbinds& BatchedUnbinds = RHICmdList.GetScratchShaderUnbinds();
 	ComputeShader->UnsetBufferParameters(BatchedUnbinds);
@@ -211,7 +211,7 @@ bool AST_ComputeRPLegacyEmitter::SetConstantParameters()
 	// Resize the array to accommodate numboids elements
 	BoidsArray.SetNum(BoidCurrentParameters.ConstantParameters.numBoids);
 
-	if (Niagara == nullptr || Niagara->GetAsset() == nullptr)
+	if (!IsValid(Niagara) || !IsValid(Niagara->GetAsset()))
 	{
 		return false;
 	}
@@ -232,7 +232,7 @@ bool AST_ComputeRPLegacyEmitter::SetDynamicParameters()
 	BoidCurrentParameters.transformMatrix = (FMatrix44f)BoundsMatrix;
 	BoidCurrentParameters.inverseTransformMatrix = (FMatrix44f)BoundsMatrix.Inverse();
 
-	if (Niagara == nullptr || Niagara->GetAsset() == nullptr)
+	if (!IsValid(Niagara) || !IsValid(Niagara->GetAsset()))
 	{
 		return false;
 	}

@@ -91,9 +91,9 @@ void AST_ComputeRPSUBExampleActor::DisposeComputeShader_RenderThread(FRHICommand
 
 bool AST_ComputeRPSUBExampleActor::SetConstantParameters()
 {
-	bool bSuccess = Super::SetConstantParameters();
+	const bool bSuccess = Super::SetConstantParameters();
 
-	if (bSuccess && MatiD != nullptr)
+	if (bSuccess && IsValid(MatiD))
 	{
 		Niagara->SetVariableMaterial("boidsMat", MatiD);
 	}
@@ -109,7 +109,7 @@ TSoftObjectPtr<UNiagaraSystem> AST_ComputeRPSUBExampleActor::GetNiagaraSystem() 
 
 bool AST_ComputeRPSUBExampleActor::SetDynamicParameters()
 {
-	bool bSuccess = Super::SetDynamicParameters();
+	const bool bSuccess = Super::SetDynamicParameters();
 
 	if (bSuccess)
 	{
