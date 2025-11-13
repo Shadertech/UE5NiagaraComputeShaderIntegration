@@ -49,7 +49,7 @@ Temaran has produced an awesome resource to learn how to write compute shaders a
 
 ## Prerequisites
 
-- Unreal Engine 5.6.x
+- Unreal Engine 5.7.x
 - C++ Project for generating binaries and intermediate folders
 - Basic understanding of Unreal Engine and its plugin system.
 
@@ -85,6 +85,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ### v0.1.4
 - Improvement | Const-correctness across codebase
+- Supports: UE 5.7.x
 - Supports: UE 5.6.x
 - Supports: UE 5.5.x
 
