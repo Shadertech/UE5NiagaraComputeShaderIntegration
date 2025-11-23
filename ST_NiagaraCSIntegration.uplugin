@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
 	"Version": 1,
-	"VersionName": "0.1.4",
+	"VersionName": "0.1.5",
 	"FriendlyName": "Niagara CS Integration",
 	"Description": "Demonstrates compute shader integration with the Niagara particle system.",
 	"Category": "ShaderTech",
@@ -21,7 +21,8 @@
 			"Type": "Runtime",
 			"LoadingPhase": "PostConfigInit",
 			"PlatformAllowList": [
-				"Win64"
+				"Win64",
+				"Mac"
 			]
 		},
 		{
@@ -29,7 +30,8 @@
 			"Type": "Runtime",
 			"LoadingPhase": "PostConfigInit",
 			"PlatformAllowList": [
-				"Win64"
+				"Win64",
+				"Mac"
 			],
 			"Dependencies": [
 				"ST_ComputeCore"
@@ -40,7 +42,8 @@
 			"Type": "Runtime",
 			"LoadingPhase": "PostConfigInit",
 			"PlatformAllowList": [
-				"Win64"
+				"Win64",
+				"Mac"
 			],
 			"Dependencies": [
 				"ST_ComputeCore"
@@ -51,7 +54,8 @@
 			"Type": "Runtime",
 			"LoadingPhase": "PostConfigInit",
 			"PlatformAllowList": [
-				"Win64"
+				"Win64",
+                "Mac"
 			],
 			"Dependencies": [
 				"ST_ComputeCore"
@@ -62,7 +66,8 @@
 			"Type": "Runtime",
 			"LoadingPhase": "Default",
 			"PlatformAllowList": [
-				"Win64"
+				"Win64",
+				"Mac"
 			],
 			"Dependencies": [
 				"ST_ComputeCore"
