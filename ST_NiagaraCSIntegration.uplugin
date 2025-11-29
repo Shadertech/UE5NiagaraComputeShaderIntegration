@@ -22,7 +22,8 @@
 			"LoadingPhase": "PostConfigInit",
 			"PlatformAllowList": [
 				"Win64",
-				"Mac"
+				"Mac",
+				"Linux"
 			]
 		},
 		{
@@ -31,7 +32,8 @@
 			"LoadingPhase": "PostConfigInit",
 			"PlatformAllowList": [
 				"Win64",
-				"Mac"
+				"Mac",
+				"Linux"
 			],
 			"Dependencies": [
 				"ST_ComputeCore"
@@ -43,7 +45,8 @@
 			"LoadingPhase": "PostConfigInit",
 			"PlatformAllowList": [
 				"Win64",
-				"Mac"
+				"Mac",
+				"Linux"
 			],
 			"Dependencies": [
 				"ST_ComputeCore"
@@ -55,7 +58,8 @@
 			"LoadingPhase": "PostConfigInit",
 			"PlatformAllowList": [
 				"Win64",
-                "Mac"
+				"Mac",
+				"Linux"
 			],
 			"Dependencies": [
 				"ST_ComputeCore"
@@ -67,7 +71,8 @@
 			"LoadingPhase": "Default",
 			"PlatformAllowList": [
 				"Win64",
-				"Mac"
+				"Mac",
+				"Linux"
 			],
 			"Dependencies": [
 				"ST_ComputeCore"

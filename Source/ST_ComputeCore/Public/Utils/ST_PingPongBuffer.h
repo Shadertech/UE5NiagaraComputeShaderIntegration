@@ -15,15 +15,18 @@ struct FST_PingPongBuffer
 	FRDGBufferSRVRef ReadScopedSRV = nullptr;
 	FRDGBufferUAVRef WriteScopedUAV = nullptr;
 
-    FST_PingPongBuffer()
-    {
-        ReadPooled = nullptr;
-        WritePooled = nullptr;
-		ReadScopedRef = nullptr;
-		WriteScopedRef = nullptr;
-		ReadScopedSRV = nullptr;
-		WriteScopedUAV = nullptr;
-    };
+	FST_PingPongBuffer() = default;
+
+	bool IsInitialized() const
+	{
+		return ReadPooled.IsValid() && WritePooled.IsValid();
+	}
+
+	bool IsRDGRegistered() const
+	{
+		// useful only inside an active FRDGBuilder
+		return ReadScopedRef != nullptr && WriteScopedRef != nullptr;
+	}
 
 	void PingPong(FRDGBuilder& GraphBuilder)
 	{
@@ -56,16 +59,8 @@ struct FST_PingPongBuffer
 
 	void ReleaseData()
 	{
-		if (ReadPooled.IsValid())
-		{
-			ReadPooled.SafeRelease();
-		}
-
-		if (WritePooled.IsValid())
-		{
-			WritePooled.SafeRelease();
-		}
-
+		ReadPooled.SafeRelease();
+		WritePooled.SafeRelease();
 		ReadScopedRef = nullptr;
 		WriteScopedRef = nullptr;
 		ReadScopedSRV = nullptr;
