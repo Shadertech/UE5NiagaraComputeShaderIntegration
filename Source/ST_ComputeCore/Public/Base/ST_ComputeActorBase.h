@@ -51,13 +51,13 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "ShaderTech|Bounds")
 	USceneComponent* Root = nullptr;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, AdvancedDisplay, Category = "ShaderTech|Bounds")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ShaderTech|Bounds")
 	bool bDebugSprite = true;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, AdvancedDisplay, Category = "ShaderTech|Bounds")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ShaderTech|Bounds")
 	bool bDebugBounds = true;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, AdvancedDisplay, Category = "ShaderTech|Bounds")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ShaderTech|Bounds")
 	bool bDebugDisplayInRuntime = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ShaderTech|Bounds")
