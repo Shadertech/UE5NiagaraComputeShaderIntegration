@@ -40,7 +40,7 @@ void FST_BoidsExampleUniformParameters::SetParameters(FRHIBatchedShaderParameter
 
 	if (randSeed.IsBound())
 	{
-		SetShaderValue(BatchedParameters, randSeed, FMath::Rand() % (INT32_MAX + 1));
+        SetShaderValue(BatchedParameters, randSeed, FMath::RandHelper(INT32_MAX));
 	}
 
 	if (boundsMatrix.IsBound())

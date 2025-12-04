@@ -41,7 +41,7 @@ void FST_GraphBullder_Boids::InitBoidsExample_RenderThread(FRDGBuilder& GraphBui
 	PassParameters->boundsMatrix = BoidCurrentParameters.transformMatrix;
 	PassParameters->boundsRadius = BoidCurrentParameters.boundsRadius;
 
-	PassParameters->randSeed = FMath::Rand() % (INT32_MAX + 1);
+    PassParameters->randSeed = FMath::RandHelper(INT32_MAX);
 
 	TShaderMapRef<FST_BoidsRPInitExampleCS> ComputeShader(GetGlobalShaderMap(GMaxRHIFeatureLevel));
 	const FIntVector GroupCounts = FIntVector(FMath::DivideAndRoundUp(BoidCurrentParameters.ConstantParameters.numBoids, BoidsExample_ThreadsPerGroup), 1, 1);

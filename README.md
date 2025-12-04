@@ -49,7 +49,7 @@ Temaran has produced an awesome resource to learn how to write compute shaders a
 
 ## Prerequisites
 
-- Unreal Engine 5.6.x
+- Unreal Engine 5.7.x
 - C++ Project for generating binaries and intermediate folders
 - Basic understanding of Unreal Engine and its plugin system.
 
@@ -58,11 +58,12 @@ Temaran has produced an awesome resource to learn how to write compute shaders a
 To integrate this plugin into your Unreal Engine project:
 
 1. Clone the repository to your local machine.
-2. Copy the plugin folder into the `Plugins` directory of your Unreal Engine project.
-3. Rebuild project files from your .uproject
-4. Enable the plugin within your project settings via the Plugins menu.
-5. Open Maps/M_TestLab (persistent map)
-6. Toggle examples by activating/deactivating sub-levels from the persistent level. You can launch each map individually, or mark them all as "always loaded" to run them all together.
+2. Checkout the branch for your engine version
+3. Copy the plugin folder into the `Plugins` directory of your Unreal Engine project.
+4. Rebuild project files from your .uproject
+5. Enable the plugin within your project settings via the Plugins menu.
+6. Open Maps/M_TestLab (persistent map)
+7. Toggle examples by activating/deactivating sub-levels from the persistent level. You can launch each map individually, or mark them all as "always loaded" to run them all together.
 
 ![subLevels](https://github.com/user-attachments/assets/4e8d3a40-5799-4aee-802d-34d79005b3ca)
 
@@ -83,8 +84,15 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Release Notes
 
+### v0.1.5
+- Improvement | Mac OS & Linux Support
+- Supports: UE 5.7.x
+- Supports: UE 5.6.x
+- Supports: UE 5.5.x
+
 ### v0.1.4
 - Improvement | Const-correctness across codebase
+- Supports: UE 5.7.x
 - Supports: UE 5.6.x
 - Supports: UE 5.5.x
 
