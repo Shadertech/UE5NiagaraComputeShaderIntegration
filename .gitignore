@@ -75,10 +75,14 @@ DerivedDataCache/*
 
 #WIP / Private files
 Shaders/ComputeRPExample/CS_BoidsTransferPositions.usf
+Shaders/ComputeRPProcessingExample
+Shaders/Private/ComputeMeshingExample
 
 Source/ComputeRPExample/ComputeShaders/BoidsRPTransferPositionsCS.h
 Source/ComputeRPExample/ComputeShaders/BoidsRPTransferPositionsCS.cpp
 Source/ComputeRPExample/GraphBuilder/BoidsTransferGB.h
 Source/ComputeRPExample/GraphBuilder/BoidsTransferGB.cpp
+Source/ST_ComputeMeshingExample
+Source/ComputeRPProcessingExample
 
 Content/Niagara/Misc/*
