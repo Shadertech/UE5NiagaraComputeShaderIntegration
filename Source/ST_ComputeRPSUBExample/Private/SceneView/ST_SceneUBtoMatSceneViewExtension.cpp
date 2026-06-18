@@ -6,6 +6,7 @@
 #include "Data/ST_BoidsLib.h"
 #include "Utils/ST_ComputeFunctionLibrary.h"
 #include "SystemTextures.h"
+#include "SceneView.h"
 
 FST_SceneUBtoMatSceneViewExtension::FST_SceneUBtoMatSceneViewExtension(const FAutoRegister& AutoRegister)
 	: FSceneViewExtensionBase(AutoRegister)
